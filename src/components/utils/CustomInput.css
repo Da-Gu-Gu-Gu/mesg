@@ -1,0 +1,34 @@
+.wrap{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    height: 40px;
+    align-items: center;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(117, 122, 129, 0.75);
+    border-radius: 8px;
+    margin-top: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+label{
+    cursor: pointer;
+    color: white;
+    line-height: 2px;
+    font-size: 1.2rem;
+    padding-right: 5px;
+    border-right: 1px solid rgb(189, 189, 189);
+}
+
+input {
+    margin-left: 5px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    color:white;
+    backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(117, 122, 129, 0.75);
+    border:none;
+    outline: none;
+}
