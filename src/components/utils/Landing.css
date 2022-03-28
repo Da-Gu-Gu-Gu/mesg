@@ -3,7 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url('https://images.unsplash.com/photo-1497996377197-e4b9024658a4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80');
+    background-image: url('https://images.unsplash.com/photo-1491466424936-e304919aada7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80');
     position: relative;
 }
 
@@ -14,7 +14,7 @@
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
    position: absolute;
-   padding: 40px;
+   padding: 30px;
    top:50%;
    left: 50%;
    transform:translate(-50%,-50%);
@@ -30,8 +30,8 @@ h2{
 span{
     margin-top: 10px;
     margin-bottom: 10px;
-    color: gray;
-    font-size: 0.8rem;
+    color: rgb(150, 150, 150);
+    font-size: 11px;
     display: block;
     text-align: center;
 }
@@ -44,6 +44,7 @@ span{
     cursor: pointer;
     height: 35px;
     text-align: left;
+    margin-bottom: 10px;
     align-items: center;
     justify-content: space-between;
 }
@@ -52,7 +53,7 @@ span{
     border-top-left-radius:5px ;
     border-bottom-left-radius: 5px;
     background-color: wheat;
-   width: 40px;
+   width: 45px;
    height: 35px;
    line-height: 40px;
     text-align: center;
@@ -65,14 +66,19 @@ span{
 }
 
 h6{
+   
     color:white;
-    display: flex;
+    display: inline;
     font-size: bold;
-    margin-top: 10px;
+    
 }
 
 .signup{
+    margin-top: 10px;
     cursor: pointer;;
     padding-left: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    display: inline;
     color:#52b69a;
 }

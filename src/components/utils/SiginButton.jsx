@@ -12,7 +12,7 @@ const SiginButton = () => {
         border:'none',
         fontSize:'bold',
         color:'white' ,
-        cursor:'pointer'
+        cursor:'pointer',
            }}>
         Continue
     </button>

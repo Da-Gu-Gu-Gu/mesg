@@ -1,0 +1,50 @@
+.title{
+    color:gray;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.avatar{
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.fl{
+    cursor: pointer;
+    height: 43px;
+    display: flex;
+    margin-bottom: 15px;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.desc{
+    overflow: hidden;
+    /* padding-left: 10px; */
+}
+
+.name{
+    font-size: 15px;
+}
+
+.msg{
+    font-size: 10px;
+}
+
+.status{
+    width: 7px;
+    height: 7px;
+    background-color: greenyellow;
+    border-radius: 50%;
+    position: absolute;
+    bottom:5%;
+    right: 10%;
+}
+
+.time{
+    font-size: 10px;
+    color: gray;
+
+}
