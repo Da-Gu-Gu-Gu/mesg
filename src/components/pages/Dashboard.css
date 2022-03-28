@@ -9,4 +9,6 @@
 .content{
     color:white;
     padding:50px;
+    display: flex;
+    gap: 30px;
 }

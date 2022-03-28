@@ -4,7 +4,17 @@
     background-color: rgba(17, 25, 40, 0.68);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.125);
-    padding: 30px;
+    padding: 20px;
+    height: 80vh;
     width: 20%;
+    overflow-y: scroll;
+}
+
+.wrap {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.wrap::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
