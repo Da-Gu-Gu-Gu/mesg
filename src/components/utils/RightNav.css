@@ -1,0 +1,49 @@
+.rightnav{
+    backdrop-filter: blur(13px) saturate(180%);
+    -webkit-backdrop-filter: blur(13px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.68);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    width: 20%;
+    height: 80vh;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+
+.rightnav {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.rightnav::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+
+
+
+.tabs{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.all,.gp{
+    cursor: pointer;
+    text-align: center;
+    padding-bottom: 5px;
+    width: 50%;
+}
+
+.all{
+    border-bottom: 2px solid #52b69a;
+}
+.gp,.cl{
+    color:gray;
+}
+
+.cl{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

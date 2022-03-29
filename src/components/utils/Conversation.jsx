@@ -11,7 +11,7 @@ const Conversation = () => {
         <div className='ctitle'>
             <img src="https://api.multiavatar.com/Starcrasher.svg" alt="profile" className='pp' />  
             <div className="fact">
-                <p>Hein Htet Aung</p>
+                <p>Gu Gu Gr Gr</p>
                 <span>Online</span>
             </div>
             <div className="function">

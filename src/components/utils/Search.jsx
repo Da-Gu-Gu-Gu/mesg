@@ -1,13 +1,13 @@
 import React from 'react'
 import './Search.css'
 import {BiSearch} from 'react-icons/bi'
-const Search = () => {
+const Search = (props) => {
   return (
     <div className="container">
-    <label htmlFor="search">
+    <label htmlFor={props.id}>
         <BiSearch />
     </label>
-    <input type="text"  id="search" placeholder='Search'/>
+    <input type="text" className='search' id={props.id} placeholder='Search'/>
     </div>
   )
 }
