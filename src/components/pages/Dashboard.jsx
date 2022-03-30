@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
         <div className="body">
         <Header />
-        <div className="content">
+        <div className="dcontent">
             <LeftNav />
             <Conversation />
             <RightNav/>

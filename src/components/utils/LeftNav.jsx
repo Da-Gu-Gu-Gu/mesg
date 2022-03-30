@@ -5,7 +5,7 @@ import Search from './Search'
 
 const LeftNav = () => {
   return (
-    <div className='wrap'>
+    <div className='lwrap'>
         <Search id="leftsearch" />
         <FriendList />
     </div>

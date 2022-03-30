@@ -4,7 +4,7 @@ import '../utils/Landing.css'
 
 const Home = () => {
   return (
-    <div className='container'>
+    <div className='home'>
     <Landing/>
     </div>
   )

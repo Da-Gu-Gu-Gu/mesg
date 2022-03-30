@@ -30,7 +30,10 @@ const Switch=(x)=>{
           Switch(props.type)
         }</label>
         <input type={props.type} id={props.type}
-         placeholder={props.text}/>
+         placeholder={props.text}
+         value={props.value}
+         onChange={(event)=>props.change(event.target.value)}
+         />
     </div>
   )
 }

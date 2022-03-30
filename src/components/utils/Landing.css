@@ -1,4 +1,4 @@
-.container{
+.home{
     height:100vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -7,7 +7,7 @@
     position: relative;
 }
 
-.content{
+.form{
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
     background-color: rgba(17, 25, 40, 0.75);
@@ -20,14 +20,14 @@
    transform:translate(-50%,-50%);
 }
 
-p{
-    color:gray
+.Fwelcome{
+    color:gray;
 }
-h2{
-    color:white
+.Ftitle{
+    color:white;
 }
 
-span{
+.inup{
     margin-top: 10px;
     margin-bottom: 10px;
     color: rgb(150, 150, 150);
@@ -65,7 +65,7 @@ span{
     text-align: center;
 }
 
-h6{
+.ques{
    
     color:white;
     display: inline;
@@ -81,4 +81,16 @@ h6{
     font-size: 12px;
     display: inline;
     color:#52b69a;
+}
+
+.back{
+    color:white;
+    cursor: pointer;
+    font-size: large;
+    padding: 3px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color:rgba(17, 25, 40, 0.75);
+    margin-bottom: 10px;
 }

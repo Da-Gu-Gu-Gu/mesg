@@ -1,7 +1,7 @@
 import React from 'react'
 import { Colors } from './Colors'
 // import 'SigninButton.css'
-const SiginButton = () => {
+const SiginButton = (props) => {
   return (
     <button style={{
         backgroundColor:Colors.primary,
@@ -13,8 +13,12 @@ const SiginButton = () => {
         fontSize:'bold',
         color:'white' ,
         cursor:'pointer',
-           }}>
-        Continue
+           }}
+          
+        onClick={props.func}
+        disabled={props.load}
+          >
+        {props.load?'Loading...':'Continue'} 
     </button>
   )
 }
