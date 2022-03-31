@@ -5,7 +5,6 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, } from 'firebase/auth'
 import CustomInput from './CustomInput'
 import SiginButton from './SiginButton'
 import { FcGoogle } from 'react-icons/fc'
-import { server } from './Domain'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
@@ -34,7 +33,7 @@ const Landing = () => {
       .then(res => {
         console.log(res)
         if(signIn){
-        axios.post(`${server}/user/signin`, {
+        axios.post(`${process.env.REACT_APP_SERVER}/user/signin`, {
           email:res.user.providerData[0].email,
           password:process.env.REACT_APP_GOOGLE_USER_PWD
         }).then(res => {
@@ -46,7 +45,7 @@ const Landing = () => {
           }
       })
     }else{
-      axios.post(`${server}/user/`, {
+      axios.post(`${process.env.REACT_APP_SERVER}/user/`, {
         img:`https://api.multiavatar.com/${res.user.providerData[0].displayName}.png`,
         isVerify:true,
         isGoogle:true,
@@ -106,7 +105,7 @@ const Landing = () => {
     let img=`https://api.multiavatar.com/${name}.png`
     console.log(img)
     setLoading(true)
-    axios.post(`${server}/user/`, {
+    axios.post(`${process.env.REACT_APP_SERVER}/user/`, {
       img,
       name,
       email,
@@ -152,7 +151,7 @@ const Landing = () => {
     }
 
     setLoading(true)
-    axios.post(`${server}/user/signin`, {
+    axios.post(`${process.env.REACT_APP_SERVER}/user/signin`, {
       email,
       password
     }).then(res => {

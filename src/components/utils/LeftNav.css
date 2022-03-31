@@ -7,6 +7,7 @@
     padding: 20px;
     height: 80vh;
     width: 20%;
+    display: none;
     overflow-y: scroll;
 }
 
@@ -16,5 +17,12 @@
 }
 .lwrap::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
+}
+
+
+@media(min-width:1300px){
+    .lwrap{
+        display: block;
+    }
 }
 
