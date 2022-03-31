@@ -179,6 +179,39 @@ const Landing = () => {
     setPassword(x)
   }
 
+
+  const forgotHandler=()=>{
+
+    if (email.length < 1) {
+      toast("Please Enter Email", {
+        position: toast.POSITION.TOP_RIGHT
+      })
+      return;
+    }
+
+    let reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    if (!reg.test(email)) {
+      toast("Invalid Email", {
+        position: toast.POSITION.TOP_RIGHT
+      })
+      return
+    }
+
+    setLoading(true)
+    axios.post(`${process.env.REACT_APP_SERVER}/user/forgotpassword`,{
+      email
+    }).then(res => {
+      console.log(res)
+        toast(res.data.message, {
+          position: toast.POSITION.TOP_RIGHT
+        })
+      
+      setLoading(false)
+    })
+      .catch(err => console.log(err))
+  }
+
   return (
     <div className='landing'>
       <ToastContainer position='top-right'
@@ -225,7 +258,7 @@ const Landing = () => {
           ):
          <>
         <CustomInput type="email" text="Email" id="emailId" value={email} change={emailhandler} />
-        <SiginButton func={signin} load={loading} />
+        <SiginButton func={forgotHandler} load={loading} />
         </>
          }
       </div>

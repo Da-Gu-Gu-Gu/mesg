@@ -2,22 +2,26 @@ import React from 'react'
 import {HiOutlineMail} from 'react-icons/hi'
 import {MdLockOutline} from 'react-icons/md'
 import {CgBoy} from 'react-icons/cg'
+import {MdOutlineGppGood} from 'react-icons/md'
 import './CustomInput.css'
 
 const CustomInput = (props) => {
 
 const Switch=(x)=>{
   switch(x){
-    case "email":
+    case "Email":
       return <HiOutlineMail />
       break;
     
-    case "password":
+    case "Password":
        return  <MdLockOutline/>
         break;
-    case "text":
+    case "Name":
        return <CgBoy />
         break;
+    case "Confirm Password":
+      return  <MdOutlineGppGood />
+      break;
     default:
         break;
 
@@ -26,10 +30,10 @@ const Switch=(x)=>{
 
   return (
     <div className='wrap'>
-        <label htmlFor={props.type}>{
-          Switch(props.type)
+        <label htmlFor={props.text}>{
+          Switch(props.text)
         }</label>
-        <input type={props.type} id={props.type}
+        <input type={props.type} id={props.text}
          placeholder={props.text}
          value={props.value}
          onChange={(event)=>props.change(event.target.value)}
