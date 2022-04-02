@@ -9,13 +9,17 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import {FiArrowLeft} from 'react-icons/fi'
+import {useDispatch} from 'react-redux'
+import { setToken, setUser } from './redux/userReducer'
+
 
 
 FirebaseApp()
 
 const Landing = () => {
 
-  // alert(process.env.REACT_APP_GOOGLE_USER_PWD)
+ 
+  const dispatch=useDispatch()
 
   const [loading, setLoading] = useState(false)
   const [signIn, setSignin] = useState(true)
@@ -42,6 +46,10 @@ const Landing = () => {
             toast(res.data.message, {
               position: toast.POSITION.TOP_RIGHT
             })
+          }
+          if(res.data.token){
+            dispatch(setToken({token:res.data.token}))
+            dispatch(setUser({user:res.data.user}))
           }
       })
     }else{
@@ -155,12 +163,17 @@ const Landing = () => {
       email,
       password
     }).then(res => {
-      console.log(res)
       if (isNaN(res.data.token)) {
         toast(res.data.message, {
           position: toast.POSITION.TOP_RIGHT
         })
       }
+      if(res.data.token){
+
+        dispatch(setToken({token:res.data.token}))
+        dispatch(setUser({user:res.data.user}))
+      }
+
       setLoading(false)
     })
       .catch(err => console.log(err))

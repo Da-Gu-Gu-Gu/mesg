@@ -5,9 +5,11 @@ import Verify from './components/pages/Verify'
 import ResetPassword from './components/pages/ResetPassword'
 import './App.css'
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const App = () => {
-  let token=false
+  let token=useSelector(state=>state.user.token)
+
   return (
     <Router>
       <Routes>
