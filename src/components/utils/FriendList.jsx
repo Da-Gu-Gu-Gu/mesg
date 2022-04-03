@@ -1,36 +1,23 @@
-import React,{useEffect,useState} from 'react'
+import React from 'react'
 import './FriendList.css'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
-import { async } from '@firebase/util'
 
-const FriendList = () => {
 
-    const token=useSelector(state=>state.user.token)
 
-   const [fl,setFl]=useState([])
-    useEffect(()=>{
+const FriendList = ({fl}) => {
 
-        axios.get(`${process.env.REACT_APP_SERVER}/user/`,{
-            headers:{
-                authorization:"Bearer "+token
-            }
-        }).then(res=>{
-            console.log(res)
-           setFl(res.data.message)
-        })
-        .catch(err=>console.log(err))
-    }
-    ,[])
+
 
   return (
     <div>
         <p className='title'>FriendList</p>
-         
-         {fl.map(x=>
-        <div className="fl" id={x._id}>
+        {fl.length < 1 ?
+                <p style={{textAlign:'center',color:'gray'}}>There is no user</p>
+                :
+         fl.map(x=>
+            (
+            <div className="fl" key={x._id}>
             <div className='avatar'>
-            <img src={x.img?x.img:"https://api.multiavatar.com/Starcrasher.svg"}  alt="avatar" />
+            <img  alt="avatar" src={x.img?`${x.img.split(' ')[0]}.svg`:"https://api.multiavatar.com/user.svg"}/>
             <div className='status'></div>
             </div>
             <div className="desc">
@@ -41,7 +28,8 @@ const FriendList = () => {
                <span className="time">8:30 pm</span> 
             </div>
         </div>
-         )}
+            )
+        )}
 
     </div>
   )

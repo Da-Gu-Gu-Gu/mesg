@@ -13,7 +13,7 @@ const Header = () => {
         <div>
         Welcome , {user?user.name.split(' ')[0].toUpperCase():"User"}
         </div> 
-        <img src={user?user.img:"https://api.multiavatar.com/Starcrasher.svg"} alt="profile" className='profile' />
+        <img src={user?`${user.img.split(' ')[0]}.svg`:"https://api.multiavatar.com/user.svg"} alt="profile" className='profile' />
         </div>
     </div>
   )

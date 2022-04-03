@@ -7,7 +7,7 @@ const Search = (props) => {
     <label htmlFor={props.id} className="sicon">
         <BiSearch />
     </label>
-    <input type="text" className='search' id={props.id} placeholder='Search'/>
+    <input type="text" className='search' value={props.value} id={props.id} placeholder='Search' onChange={(e)=>props.func(e.target.value)}/>
     </div>
   )
 }

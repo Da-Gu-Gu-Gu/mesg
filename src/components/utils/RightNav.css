@@ -30,22 +30,49 @@
 }
 
 .all,.gp{
+    color:gray;
     cursor: pointer;
     text-align: center;
     padding-bottom: 5px;
     width: 50%;
+    border-bottom: 2px solid transparent;
 }
 
-.all{
-    border-bottom: 2px solid #52b69a;
-}
 .gp,.cl{
     color:gray;
 }
 
+.underline{
+    color: white;
+    border-bottom: 2px solid #52b69a;
+    transition: all 0.4s ease-in;
+}
+
+
 .cl{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.gp_create{
+    border:1px solid rgba(255, 255, 255, 0.125);
+    padding: 5px;
+    border-radius: 10px;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-bottom: 5px;
+    font-size: 25px;
+    color: gray;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.gp_create:hover{
+    color:white;
 }
 
 @media(min-width:768px){
