@@ -1,32 +1,43 @@
-import React from 'react'
+import React,{useState} from 'react'
 import './Conversation.css'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
 import Messages from './Messages'
 import SendMessage from './SendMessage'
-import { useSelector } from 'react-redux'
+import ChatProfile from './ChatProfile'
 
-const Conversation = () => {
 
-  let room=false
+const Conversation = ({chat,title,roomtype}) => {
 
+ const [cp,setCp]=useState(false)
+
+const open=()=>{
+   setCp(false)
+ }
   return (
     <div className='conversation'>
-      {room?
+      {chat?
         <>
         <div className='ctitle'>
-            <img src="https://api.multiavatar.com/Starcrasher.svg" alt="profile" className='pp' />  
+            <img src={`${title[0]?title[0].img.split(' ')[0]:"https://api.multiavatar.com/user"}.svg`} alt="profile" className='pp' />  
             <div className="fact">
-                <p>Gu Gu Gr Gr</p>
-                <span>Online</span>
+                <p>{title[0]?title[0].name.toUpperCase():"User"}</p>
+                <span>{roomtype?"Group":"Personal"}</span>
             </div>
             <div className="function">
                <BsFillCameraVideoFill className='videocall'/>
-               <CgProfile className='picon' />
+               <CgProfile className='picon' onClick={()=>setCp(true)} />
             </div>
         </div>
-        <Messages />
-        <SendMessage />
+        {cp?
+        <ChatProfile data={title} open={open} />
+        :
+        <>
+          <Messages mesg={chat} />
+          <SendMessage />
+        </>
+      }
+     
         </>
       :
       (

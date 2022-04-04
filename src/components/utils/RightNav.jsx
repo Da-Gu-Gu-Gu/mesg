@@ -6,7 +6,7 @@ import {IoCreateOutline} from 'react-icons/io5'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 
-const RightNav = () => {
+const RightNav = ({room}) => {
     
   const token=useSelector(state=>state.user.token)
   const [chatlist,setChatlist]=useState([])
@@ -36,10 +36,10 @@ const RightNav = () => {
             <p className={`gp ${group && 'underline'}`} onClick={()=>setGroup(true)}>Group</p>
         </div> 
         {group && <div><IoCreateOutline className='gp_create' /></div>}
-        {!group && <Search id="rightsearch" value={searchcl} func={searchHandler} />}
+        {!group && <Search id="rightsearch" value={searchcl} handler={searchHandler} />}
         <p className='cl'>Chat List</p>
         <div className="chatwrap">
-        <ChatList data={chatlist} search={searchcl} group={group}/>
+        <ChatList data={chatlist} search={searchcl} group={group} room={room}/>
         </div>
     </div>
   )
