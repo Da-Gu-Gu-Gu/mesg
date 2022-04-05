@@ -7,16 +7,19 @@ import SendMessage from './SendMessage'
 import ChatProfile from './ChatProfile'
 
 
-const Conversation = ({chat,title,roomtype}) => {
+const Conversation = ({chat,title,roomtype,intro}) => {
 
  const [cp,setCp]=useState(false)
+
+ 
+ 
 
 const open=()=>{
    setCp(false)
  }
   return (
     <div className='conversation'>
-      {chat?
+      {!intro?
         <>
         <div className='ctitle'>
             <img src={`${title[0]?title[0].img.split(' ')[0]:"https://api.multiavatar.com/user"}.svg`} alt="profile" className='pp' />  

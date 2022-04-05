@@ -3,7 +3,7 @@ import './FriendList.css'
 
 
 
-const FriendList = ({ fl, search }) => {
+const FriendList = ({ fl, search ,chatlist }) => {
 
 
 
@@ -23,7 +23,18 @@ const FriendList = ({ fl, search }) => {
           })
           .map(x =>
           (
-            <div className="fl" key={x._id}>
+            <div className="fl" key={x._id} 
+            //still a problem
+            chatlistid={
+              chatlist
+              .filter(y=>y.isGroup===false )
+              .filter(z=>z.member.filter(a=>a._id===x._id))
+              ?
+              [0]._id:null
+              
+            } onClick={(e)=>console.log(e.target) }
+            //need to fix
+            >
               <div className='avatar'>
                 <img alt="avatar" src={x.img ? `${x.img.split(' ')[0]}.svg` : "https://api.multiavatar.com/user.svg"} />
                 <div className='status'></div>

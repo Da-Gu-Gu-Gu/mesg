@@ -1,23 +1,30 @@
 import React from 'react'
 import './ChatList.css'
 import { useSelector } from 'react-redux'
+import Search from './Search'
+import FriendList from './FriendList'
 
 
 
-const ChatList = ({ data ,group,search , room}) => {
+const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler}) => {
 
     const user=useSelector(state=>state.user.user)
 
 
     return (
         <div>
-            {data.length < 1 ?
-                <p style={{textAlign:'center',color:'gray'}}>There is no Room</p>
+            {data.length < 3 ?
+            <>
+            <Search id="rightsearch" value={fsearch} handler={fsearchHandler} />
+            <FriendList   fl={fl}  search={fsearch}  chatlist={data}/>
+            </>
+                
                 :
                 data
                 .filter(x=>group?x.isGroup===group:x)
                 .map(x=>(
                 <div className="fl" key={x._id} onClick={()=>{
+                    intro()
                     room(x._id,x.isGroup,x.member.filter(x=>x._id!==user._id))
                 }
                     }>
