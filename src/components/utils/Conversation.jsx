@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect,createRef} from 'react'
 import './Conversation.css'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
@@ -7,17 +7,21 @@ import SendMessage from './SendMessage'
 import ChatProfile from './ChatProfile'
 
 
-const Conversation = ({chat,title,roomtype,intro}) => {
+const Conversation = ({roomid,chat,title,roomtype,intro}) => {
 
  const [cp,setCp]=useState(false)
+ const scrollref=createRef()
 
+//  useEffect(()=>{
+//   scrollref?.current.scrollIntoView({
+//       behavior:'smooth'
+//   })
+// },[chat])
 
- 
- 
 
 const open=()=>{
    setCp(false)
- }
+  }
   return (
     <div className='conversation'>
       {!intro?
@@ -34,12 +38,16 @@ const open=()=>{
             </div>
         </div>
         {cp?
-        <ChatProfile data={title} open={open} />
+        <ChatProfile data={title} roomtype={roomtype} open={open} />
         :
+     
+        // <div ref={scrollref}>
         <>
           <Messages mesg={chat} />
-          <SendMessage />
-        </>
+          
+          <SendMessage roomid={roomid} />
+          </>
+          // </div>
       }
      
         </>

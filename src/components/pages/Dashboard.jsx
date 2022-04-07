@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [roomtype,setRoomtype] =useState(false)
   const [intro,setIntro]=useState(true)
   const [fsearch,setFsearch]=useState('')
+  const [roomId,setRoomId]=useState('')
 
   //friend list
   const [fl,setFl]=useState([])
@@ -35,7 +36,7 @@ const Dashboard = () => {
 
   //conversation
   const roomOpen=async(id,group,member)=>{
-    console.log(id)
+
      await axios.get(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
           headers:{
               authorization:'Bearer '+token
@@ -44,14 +45,14 @@ const Dashboard = () => {
       .then(res=>{
         console.log(res.data)
           if(!res.data.err){
-           
+            setRoomId(id)
             setMessage(res.data)
             setConversation(member)
             setRoomtype(group)
           }
       })
   }
-
+ 
   //room create
   //personal
   const roomCreate=async(x,member)=>{
@@ -68,7 +69,9 @@ const Dashboard = () => {
       }
     })
     .then(res=>{
-     console.log(res.data.room[0]._id)
+     console.log(res.data.room)
+     setRoomId(res.data.room[0]._id)
+     setIntro(false)
      return  roomOpen(res.data.room[0]._id,res.data.room[0].isGroup,title)
   
 
@@ -105,7 +108,7 @@ const Dashboard = () => {
         <Header />
         <div className="dcontent">
             <LeftNav fl={fl} chatlist={chatlist} fsearchHandler={fsearchHandler} fsearch={fsearch} roomCreate={roomCreate} roomOpen={roomOpen} />
-            <Conversation intro={intro} chat={message} title={conversation} roomtype={roomtype} />
+            <Conversation roomid={roomId} intro={intro} chat={message} title={conversation} roomtype={roomtype} />
             <RightNav room={roomOpen} chatlist={chatlist} intro={introHandler} fl={fl} fsearchHandler={fsearchHandler} fsearch={fsearch} />
         </div>
         </div>

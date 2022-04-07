@@ -10,7 +10,6 @@ const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler})
 
     const user=useSelector(state=>state.user.user)
 
-
     return (
         <div>
             {data.length < 1 ?
@@ -22,6 +21,19 @@ const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler})
                 :
                 data
                 .filter(x=>group?x.isGroup===group:x)
+                .filter(y=>
+                    y.member.filter(a=>{
+                    if(a._id!==user._id){
+                         y.name=a.name
+                    }
+                })
+                )
+                .filter(z=>{
+                if (search === '') return z
+                if (z.name.toLowerCase().includes(search.toLowerCase())) {
+                  return z
+                }
+            })
                 .map(x=>(
                 <div className="fl" key={x._id} onClick={()=>{
                     intro()
