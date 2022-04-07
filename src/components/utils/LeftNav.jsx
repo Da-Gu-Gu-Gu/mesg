@@ -6,7 +6,7 @@ import Search from './Search'
 
 const LeftNav = ({fl,fsearch,fsearchHandler,roomCreate,roomOpen,chatlist}) => {
 
- console.log(chatlist)
+
   
   return (
     <div className='lwrap'>

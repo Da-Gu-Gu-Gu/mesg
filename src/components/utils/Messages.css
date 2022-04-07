@@ -1,5 +1,14 @@
 .mwrap{
-    /* height: 91%; */
+    height: 65vh;
+    overflow: scroll;
+}
+
+.mwrap {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.mwrap::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .other{

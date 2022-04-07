@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{createRef,useEffect} from 'react'
 import './Messages.css'
 import { useSelector } from 'react-redux'
 import { format } from 'timeago.js';
@@ -11,9 +11,16 @@ import { format } from 'timeago.js';
 const Messages = ({ mesg }) => {
 
     const user = useSelector(state => state.user.user)
+    const scrollref=createRef()
+
+    useEffect(()=>{
+        scrollref?.current.scrollIntoView({
+            behavior:'smooth'
+        })
+    },[mesg])
 
     return (
-        <div className='mwrap'>
+        <div className='mwrap' ref={scrollref} >
             {
                 mesg.map((x) =>
                     user._id !== x.sender._id ?

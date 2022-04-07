@@ -13,7 +13,7 @@ const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler})
 
     return (
         <div>
-            {data.length < 3 ?
+            {data.length < 1 ?
             <>
             <Search id="rightsearch" value={fsearch} handler={fsearchHandler} />
             <FriendList   fl={fl}  search={fsearch}  chatlist={data}/>

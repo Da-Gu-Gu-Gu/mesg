@@ -31,39 +31,50 @@ const Dashboard = () => {
    }
    ,[token])
 
-  //room create
-  //personal
-  const roomCreate=async(x)=>{
-    let data={
-      member:[user._id.toString(),x._id.toString()]
-    }
-    await axios.post(`${process.env.REACT_APP_SERVER}/room`,
-    data,{
-      headers:{
-        authorization:'Bearer '+token
-      }
-    })
-    .then(res=>
-      console.log(res.data) 
-      )
-
-  }
+  
 
   //conversation
   const roomOpen=async(id,group,member)=>{
+    console.log(id)
      await axios.get(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
           headers:{
               authorization:'Bearer '+token
           }
       })
       .then(res=>{
+        console.log(res.data)
           if(!res.data.err){
+           
             setMessage(res.data)
             setConversation(member)
             setRoomtype(group)
           }
       })
   }
+
+  //room create
+  //personal
+  const roomCreate=async(x,member)=>{
+    let data={
+      member:[user._id.toString(),x.toString()]
+    }
+    let title=[]
+    title[0]=member
+
+    await axios.post(`${process.env.REACT_APP_SERVER}/room`,
+    data,{
+      headers:{
+        authorization:'Bearer '+token
+      }
+    })
+    .then(res=>{
+     console.log(res.data.room[0]._id)
+     return  roomOpen(res.data.room[0]._id,res.data.room[0].isGroup,title)
+  
+
+  })
+
+}
 
   const introHandler=()=>{
     setIntro(false)
