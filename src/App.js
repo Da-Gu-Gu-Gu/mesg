@@ -4,8 +4,9 @@ import Home from './components/pages/Home'
 import Verify from './components/pages/Verify'
 import ResetPassword from './components/pages/ResetPassword'
 import './App.css'
-import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route, Navigate} from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import MobileConversation from './components/pages/MobileConversation'
 
 const App = () => {
   let token=useSelector(state=>state.user.token)
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={token?<Dashboard/>:<Home/>} />
         <Route path="/verify/:id/:token" element={<Verify />} />
         <Route path="/resetpassword/:id/:token" element={<ResetPassword />} />
+        <Route path="/conversation" element={<MobileConversation />} />
       </Routes>
     </Router>
   )

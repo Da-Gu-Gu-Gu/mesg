@@ -1,14 +1,19 @@
 import React from 'react'
 import './ChatList.css'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import Search from './Search'
 import FriendList from './FriendList'
 
 
 
-const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler}) => {
+const ChatList = ({ data ,group,search , view,room,intro ,fl,fsearch,fsearchHandler}) => {
 
     const user=useSelector(state=>state.user.user)
+    const navigate=useNavigate()
+    // const redirect=()=>{
+    //     navigate('/conversation')
+    // }
 
     return (
         <div>
@@ -38,6 +43,7 @@ const ChatList = ({ data ,group,search , room,intro ,fl,fsearch,fsearchHandler})
                 <div className="fl" key={x._id} onClick={()=>{
                     intro()
                     room(x._id,x.isGroup,x.member.filter(x=>x._id!==user._id))
+                   
                 }
                     }>
                     <div className='avatar'>

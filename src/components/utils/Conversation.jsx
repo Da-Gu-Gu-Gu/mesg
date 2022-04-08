@@ -1,4 +1,4 @@
-import React,{useState,useEffect,createRef} from 'react'
+import React,{useState} from 'react'
 import './Conversation.css'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
@@ -7,29 +7,25 @@ import SendMessage from './SendMessage'
 import ChatProfile from './ChatProfile'
 
 
-const Conversation = ({roomid,chat,title,roomtype,intro}) => {
+const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
 
  const [cp,setCp]=useState(false)
- const scrollref=createRef()
+console.log(view)
 
-//  useEffect(()=>{
-//   scrollref?.current.scrollIntoView({
-//       behavior:'smooth'
-//   })
-// },[chat])
+
 
 
 const open=()=>{
    setCp(false)
   }
   return (
-    <div className='conversation'>
+    <div className={classname?classname:'conversation'} style={{display:`${view?'block':'none'}`}}>
       {!intro?
         <>
         <div className='ctitle'>
-            <img src={`${title[0]?title[0].img.split(' ')[0]:"https://api.multiavatar.com/user"}.svg`} alt="profile" className='pp' />  
+            <img src={`${title?title[0].img.split(' ')[0]:"https://api.multiavatar.com/user"}.svg`} alt="profile" className='pp' />  
             <div className="fact">
-                <p>{title[0]?title[0].name.toUpperCase():"User"}</p>
+                <p>{title?title[0].name.toUpperCase():"User"}</p>
                 <span>{roomtype?"Group":"Personal"}</span>
             </div>
             <div className="function">
@@ -40,14 +36,11 @@ const open=()=>{
         {cp?
         <ChatProfile data={title} roomtype={roomtype} open={open} />
         :
-     
-        // <div ref={scrollref}>
+
         <>
-          <Messages mesg={chat} />
-          
+          <Messages mesg={chat} />  
           <SendMessage roomid={roomid} />
           </>
-          // </div>
       }
      
         </>

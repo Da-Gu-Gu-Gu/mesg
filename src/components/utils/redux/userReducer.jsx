@@ -5,6 +5,7 @@ const userSlice=createSlice({
     initialState:{
         token:'',
         user:null,
+        conversation:{}
     },
     reducers:{
         setToken:(state,action)=>{
@@ -12,10 +13,13 @@ const userSlice=createSlice({
         },
         setUser:(state,action)=>{
             state.user=action.payload.user
+        },
+        setMobileConversation:(state,action)=>{
+            state.conversation=action.payload.conversation
         }
     }
 })
 
 
-export const {setToken,setUser} = userSlice.actions
+export const {setToken,setUser,setMobileConversation} = userSlice.actions
 export default userSlice.reducer

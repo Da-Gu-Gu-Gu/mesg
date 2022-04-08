@@ -6,8 +6,12 @@ import Conversation from "../utils/Conversation";
 import RightNav from "../utils/RightNav";
 import { useSelector } from 'react-redux'
 import axios from 'axios'
+import { Link,useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setMobileConversation } from "../utils/redux/userReducer";
 
 const Dashboard = () => {
+  const dispatch=useDispatch()
   const token=useSelector(state=>state.user.token)
   const user=useSelector(state=>state.user.user)
   const [message,setMessage]=useState([])
@@ -16,6 +20,18 @@ const Dashboard = () => {
   const [intro,setIntro]=useState(true)
   const [fsearch,setFsearch]=useState('')
   const [roomId,setRoomId]=useState('')
+  const [lview,setLView] =useState(false)
+  const history = useHistory();
+ 
+
+ window.addEventListener('resize',()=>{
+  if(window.innerWidth>=768){
+      setLView(true)
+  }else{
+      setLView(false)
+  }
+})
+
 
   //friend list
   const [fl,setFl]=useState([])
@@ -49,6 +65,19 @@ const Dashboard = () => {
             setMessage(res.data)
             setConversation(member)
             setRoomtype(group)
+            dispatch(setMobileConversation({
+              conversation:{
+                roomid:roomId,
+                intro:intro,
+                chat:message,
+                roomtype:roomtype,
+                title:conversation
+              }
+            }))
+            if(!lview){
+              console.log('hrr')
+              history.push("/conversation");
+            }
           }
       })
   }
@@ -103,13 +132,18 @@ const Dashboard = () => {
     })
   },[token])
 
+ 
+
   return (
         <div className="body">
+         
         <Header />
         <div className="dcontent">
-            <LeftNav fl={fl} chatlist={chatlist} fsearchHandler={fsearchHandler} fsearch={fsearch} roomCreate={roomCreate} roomOpen={roomOpen} />
-            <Conversation roomid={roomId} intro={intro} chat={message} title={conversation} roomtype={roomtype} />
-            <RightNav room={roomOpen} chatlist={chatlist} intro={introHandler} fl={fl} fsearchHandler={fsearchHandler} fsearch={fsearch} />
+            <LeftNav view={lview} fl={fl} chatlist={chatlist} fsearchHandler={fsearchHandler} fsearch={fsearch} roomCreate={roomCreate} roomOpen={roomOpen} />
+            <Conversation 
+            view={lview}
+             roomid={roomId} intro={intro} chat={message} title={conversation} roomtype={roomtype} />
+            <RightNav view={lview} room={roomOpen} chatlist={chatlist} intro={introHandler} fl={fl} fsearchHandler={fsearchHandler} fsearch={fsearch} />
         </div>
         </div>
   )

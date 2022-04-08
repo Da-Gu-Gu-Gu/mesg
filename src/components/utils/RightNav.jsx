@@ -5,7 +5,7 @@ import {IoCreateOutline} from 'react-icons/io5'
 import Search from './Search'
 
 
-const RightNav = ({room,intro,fl,fsearch,fsearchHandler,chatlist}) => {
+const RightNav = ({view,room,intro,fl,fsearch,fsearchHandler,chatlist}) => {
     
   const [csearch,setCsearch]=useState('')
   const [group,setGroup]=useState(false)
@@ -26,7 +26,7 @@ const csearchHandler=(x)=>{
         {chatlist.length > 0 && <p className='cl'>Chat List</p> }
        
         <div className="chatwrap">
-        <ChatList intro={intro} data={chatlist} search={csearch} group={group} room={room}  fl={fl} fsearchHandler={fsearchHandler} fsearch={fsearch}/>
+        <ChatList view={view} intro={intro} data={chatlist} search={csearch} group={group} room={room}  fl={fl} fsearchHandler={fsearchHandler} fsearch={fsearch}/>
         </div>
     </div>
   )
