@@ -6,7 +6,7 @@ import Conversation from "../utils/Conversation";
 import RightNav from "../utils/RightNav";
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { Link,useHistory } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setMobileConversation } from "../utils/redux/userReducer";
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [fsearch,setFsearch]=useState('')
   const [roomId,setRoomId]=useState('')
   const [lview,setLView] =useState(false)
-  const history = useHistory();
+  const navigate = useNavigate();
  
 
  window.addEventListener('resize',()=>{
@@ -32,6 +32,17 @@ const Dashboard = () => {
   }
 })
 
+useEffect(()=>{
+  dispatch(setMobileConversation({
+    conversation:{
+      roomid:roomId,
+      intro:intro,
+      chat:message,
+      roomtype:roomtype,
+      title:conversation
+    }
+  }))
+},[roomId,message,roomtype,conversation])
 
   //friend list
   const [fl,setFl]=useState([])
@@ -58,27 +69,29 @@ const Dashboard = () => {
               authorization:'Bearer '+token
           }
       })
-      .then(res=>{
+      .then(async(res)=>{
         console.log(res.data)
           if(!res.data.err){
             setRoomId(id)
             setMessage(res.data)
             setConversation(member)
             setRoomtype(group)
-            dispatch(setMobileConversation({
+            await dispatch(setMobileConversation({
               conversation:{
-                roomid:roomId,
-                intro:intro,
-                chat:message,
-                roomtype:roomtype,
-                title:conversation
+                roomid:id,
+                intro:id?false:true,
+                chat:res.data,
+                roomtype:group,
+                title:member
               }
             }))
+            // .then(()=>{ 
             if(!lview){
               console.log('hrr')
-              history.push("/conversation");
+              navigate("/conversation",{replace:true});
             }
-          }
+          // })
+        }
       })
   }
  
