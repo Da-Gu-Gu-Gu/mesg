@@ -1,4 +1,4 @@
-import React,{useEffect,createRef} from 'react'
+import React,{useEffect,createRef,useState} from 'react'
 import './Messages.css'
 import { useSelector } from 'react-redux'
 import { format } from 'timeago.js';
@@ -8,23 +8,33 @@ import { format } from 'timeago.js';
 
 
 
-const Messages = ({ mesg }) => {
+const Messages = ({ mesg,newmessage }) => {
 
     const user = useSelector(state => state.user.user)
     const scrollref=createRef(null)
+    const [allmesg,setAllmesg]=useState([])
   
  useEffect(()=>{
-  scrollref?.current.scrollIntoView({
-      behavior:'smooth'
-  })
+     setAllmesg(mesg)
 },[mesg])
+
+console.log(newmessage)
+// useEffect(()=>{
+//     setAllmesg([...mesg,newmessage])
+// },[newmessage])
+
+useEffect(()=>{
+    scrollref?.current.scrollIntoView({
+        behavior:'smooth'
+    })
+},[allmesg])
   
 
     return (
         <div className='mwrap'   >
             <div className='mesg_content'>
             {
-                mesg.map((x) =>
+                allmesg.map((x) =>
                     user._id !== x.sender._id ?
 
                         (

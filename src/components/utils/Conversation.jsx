@@ -10,7 +10,12 @@ import ChatProfile from './ChatProfile'
 const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
 
  const [cp,setCp]=useState(false)
-console.log(view)
+ console.log(chat)
+ const [arrivalMessage,setArrivalMessage]=useState({})
+
+ const arrivalHandler=(x)=>{
+   setArrivalMessage(x)
+ }
 
 
 
@@ -38,8 +43,8 @@ const open=()=>{
         :
 
         <>
-          <Messages mesg={chat} />  
-          <SendMessage roomid={roomid} />
+          <Messages mesg={chat} newmessage={arrivalMessage} />  
+          <SendMessage receiver={title} arrival={arrivalHandler} roomid={roomid} />
           </>
       }
      

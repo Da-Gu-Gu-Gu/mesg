@@ -1,14 +1,15 @@
 import Header from "../utils/Header";
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useRef} from 'react'
 import './Dashboard.css'
 import LeftNav from "../utils/LeftNav";
 import Conversation from "../utils/Conversation";
 import RightNav from "../utils/RightNav";
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { Link,useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setMobileConversation } from "../utils/redux/userReducer";
+
 
 const Dashboard = () => {
   const dispatch=useDispatch()
@@ -21,8 +22,8 @@ const Dashboard = () => {
   const [fsearch,setFsearch]=useState('')
   const [roomId,setRoomId]=useState('')
   const [lview,setLView] =useState(false)
+  // const [socket,setSocket]=useState(null)
   const navigate = useNavigate();
- 
 
  window.addEventListener('resize',()=>{
   if(window.innerWidth>=768){
