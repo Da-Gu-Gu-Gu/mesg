@@ -7,15 +7,19 @@ import { useSelector } from 'react-redux'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
 import {io} from 'socket.io-client'
+import { useDispatch } from 'react-redux'
+import { setNewMessage } from './redux/userReducer'
 
  
 const SendMessage = ({roomid,receiver,arrival}) => {
   
   const token=useSelector(state=>state.user.token)
   const user=useSelector(state=>state.user.user)
+  const dispatch=useDispatch()
 
   const socket=useRef(io(`ws://localhost:5000`))
 
+  let RoomID=roomid
 // console.log(room)
   
 useEffect(()=>{
@@ -38,16 +42,7 @@ console.log(socket)
  
 
   
-  useEffect(()=>{
-    socket.current.on("getMessage",data=>{
-     arrival({
-         _id:Math.random.toString(),
-        sender:data.sender,
-        message:data.text,
-        updatdeAt:Date.now()
-      })
-    })
-  },[mesend])
+  
 
  
  
@@ -74,11 +69,25 @@ console.log(socket)
     if(res.data.message){
       socket.current.emit("sendMessage",{
         sender:user,
-       text:mesgtext,
-        recevier:'aa',
+        text:mesgtext,
+        recevier:receiver,
       })
     }
     setMesend(true)
+    socket.current.on("getMessage",data=>{
+      console.log(data)
+      console.log(data.recevier)
+  dispatch(setNewMessage({
+       newmessage:{
+         
+         _id:RoomID,
+        sender:data.recevier[0],
+        message:data.text,
+        updatdeAt:Date.now()
+      }
+    })
+     )
+    })
   })
   }
 

@@ -1,27 +1,44 @@
-import React,{useEffect,createRef,useState} from 'react'
+import React,{useEffect,createRef,useState,useRef} from 'react'
 import './Messages.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'timeago.js';
+import { setNewMessage } from './redux/userReducer';
 
 
 
 
 
 
-const Messages = ({ mesg,newmessage }) => {
+
+
+const Messages = ({ mesg ,roomid}) => {
 
     const user = useSelector(state => state.user.user)
+    const newmessage=useSelector(state=>state.user.newmessage)
     const scrollref=createRef(null)
     const [allmesg,setAllmesg]=useState([])
+    const dispatch=useDispatch()
+
+    
+
   
  useEffect(()=>{
      setAllmesg(mesg)
 },[mesg])
 
 console.log(newmessage)
-// useEffect(()=>{
-//     setAllmesg([...mesg,newmessage])
-// },[newmessage])
+
+
+useEffect(()=>{
+    console.log(newmessage)
+   if(newmessage._id){
+     if ( newmessage._id==roomid){
+        setAllmesg([...mesg,newmessage])
+        setNewMessage({newmessage:{}})
+     } 
+   }
+    // setAllmesg([...mesg,newmessage])
+},[newmessage])
 
 useEffect(()=>{
     scrollref?.current.scrollIntoView({
@@ -40,7 +57,7 @@ useEffect(()=>{
                         (
                         <div className="otherwrap" key={x._id}>
                         <div className='other' >
-                            <img src={`${x.sender.img.split(' ')[0]}.svg`} alt="op" />
+                            <img src={`${x.sender.img?.split(' ')[0]}.svg`} alt="op" />
                             <p className="om">
                                 {x.message}
                             </p>

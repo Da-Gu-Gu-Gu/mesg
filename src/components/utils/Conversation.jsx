@@ -43,7 +43,7 @@ const open=()=>{
         :
 
         <>
-          <Messages mesg={chat} newmessage={arrivalMessage} />  
+          <Messages mesg={chat} newmessage={arrivalMessage} roomid={roomid} />  
           <SendMessage receiver={title} arrival={arrivalHandler} roomid={roomid} />
           </>
       }

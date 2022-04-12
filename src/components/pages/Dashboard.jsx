@@ -25,6 +25,15 @@ const Dashboard = () => {
   // const [socket,setSocket]=useState(null)
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if(window.innerWidth>=768){
+      setLView(true)
+  }else{
+      setLView(false)
+  }
+  },[])
+
+
  window.addEventListener('resize',()=>{
   if(window.innerWidth>=768){
       setLView(true)
@@ -87,6 +96,13 @@ useEffect(()=>{
               }
             }))
             // .then(()=>{ 
+
+              if(window.innerWidth>=768){
+                setLView(true)
+            }else{
+                setLView(false)
+            }
+
             if(!lview){
               console.log('hrr')
               navigate("/conversation",{replace:true});
