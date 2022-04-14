@@ -11,40 +11,32 @@ import { setNewMessage } from './redux/userReducer';
 
 
 
-const Messages = ({ mesg ,roomid}) => {
+const Messages = ({ mesg ,roomid,newmessage}) => {
 
     const user = useSelector(state => state.user.user)
-    const newmessage=useSelector(state=>state.user.newmessage)
     const scrollref=createRef(null)
     const [allmesg,setAllmesg]=useState([])
-    const dispatch=useDispatch()
 
-    
+    // const [newmesg,setNewmesg] =useState([])
 
   
  useEffect(()=>{
      setAllmesg(mesg)
 },[mesg])
 
+
+// useEffect(()=>{
+//     setNewMessage()
+// })
+
 console.log(newmessage)
 
-
-useEffect(()=>{
-    console.log(newmessage)
-   if(newmessage._id){
-     if ( newmessage._id==roomid){
-        setAllmesg([...mesg,newmessage])
-        setNewMessage({newmessage:{}})
-     } 
-   }
-    // setAllmesg([...mesg,newmessage])
-},[newmessage])
 
 useEffect(()=>{
     scrollref?.current.scrollIntoView({
         behavior:'smooth'
     })
-},[allmesg])
+},[allmesg,newmessage])
   
 
     return (
@@ -78,6 +70,41 @@ useEffect(()=>{
                             </div>
                         )
                 )}
+
+{/* socket new message */}
+{   
+                newmessage[0]?
+                newmessage[0][0].roomid===roomid &&
+                newmessage.map((x,index) =>
+                    user._id !== x[0].sender._id ?
+
+                        (
+                        <div className="otherwrap" key={index.toString()}>
+                        <div className='other' >
+                            <img src={`${x[0].sender.img?.split(' ')[0]}.svg`} alt="op" />
+                            <p className="om">
+                                {x[0].text}
+                            </p>
+                            <span >{format(Date.now())}</span>
+                        </div>
+                        </div>
+                        )
+                        :
+                        (
+                            <div className='mewrap'  key={index.toString()}>
+                            <div className='me'>
+                                <span>{format(Date.now())}</span>
+                                <p className="mm">
+                                  {x[0].text}
+                                </p>
+                                <img src={`${x[0].sender.img.split(' ')[0]}.svg`} alt="mp" />
+                            </div>
+                            </div>
+                        )
+                ):
+                null
+                }
+
                 <div  ref={scrollref}/>
                 </div>
 

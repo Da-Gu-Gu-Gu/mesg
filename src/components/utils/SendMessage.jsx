@@ -24,16 +24,16 @@ const SendMessage = ({roomid,receiver,arrival}) => {
   
 useEffect(()=>{
   socket.current=io("ws://localhost:5000")
+  socket.current.emit("addRoom",roomid)
+  socket.current.on("getRooms",rooms=>{
+    console.log(rooms)
+  })
+  console.log(socket)
 },[])
 
- useEffect(()=>{
-    socket.current.emit("addUser",user._id)
-    socket.current.on("getUsers",users=>{
-      console.log(users)
-    })
- },[user])
 
-console.log(socket)
+ 
+
 
   const [mesgtext,setMesgtext] = useState('')
   const [bdisable,setbDisable] =useState(true) 
@@ -64,32 +64,23 @@ console.log(socket)
     headers:{
       authorization:'Bearer '+token
     }
-  }).then(res=>{
+  }).then(async(res)=>{
     console.log(receiver[0])
     if(res.data.message){
-      socket.current.emit("sendMessage",{
+      socket.current.emit('sendMessage',{
+        roomid:roomid,
         sender:user,
         text:mesgtext,
-        recevier:receiver,
       })
     }
     setMesend(true)
-    socket.current.on("getMessage",data=>{
+    socket.current.on(`getMessage${roomid}`,data=>{
       console.log(data)
-      console.log(data.recevier)
-  dispatch(setNewMessage({
-       newmessage:{
-         
-         _id:RoomID,
-        sender:data.recevier[0],
-        message:data.text,
-        updatdeAt:Date.now()
-      }
-    })
-     )
+      arrival([data])
     })
   })
-  }
+  
+}
 
 
   const addEmoji = (emoji) => {

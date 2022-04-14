@@ -1,16 +1,21 @@
 @import url('./Colors.jsx'); 
 
 .header{
+    position: relative;
     backdrop-filter: blur(13px) saturate(180%);
     -webkit-backdrop-filter: blur(13px) saturate(180%);
     background-color: rgba(17, 25, 40, 0.68);
     /* border-radius: 12px; */
     border: 1px solid rgba(255, 255, 255, 0.125);
-    height: 55px;
+    /* height: max-content;
+    height: 100px; */
+    z-index: 999;
+    padding:10px;
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
     align-items: center;
+ 
     justify-content: space-between;
 }
 
@@ -19,6 +24,7 @@
     color: #52b69a;
 }
 .welcome{
+  
     color: white;
     align-items: center;
     display: flex;
@@ -31,4 +37,41 @@
     height: 35px;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.gg{
+    display: flex;
+    align-items: center;
+}
+
+.dropdown{
+    cursor: pointer;
+    /* line-height: 55px; */
+    margin-left: 10px;
+}
+
+.dropdown_menu{
+    padding: 5px;
+    position: absolute;
+    display: block;
+    width: 100px;
+    backdrop-filter: blur(13px) saturate(180%);
+    -webkit-backdrop-filter: blur(13px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.68);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+     top:60px;
+     text-align: center;
+     line-height: 40px;
+     z-index: 99;
+     right: 25px;
+   color:tomato !important;
+    
+}
+
+li{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

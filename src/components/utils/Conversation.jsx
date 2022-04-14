@@ -10,11 +10,11 @@ import ChatProfile from './ChatProfile'
 const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
 
  const [cp,setCp]=useState(false)
- console.log(chat)
- const [arrivalMessage,setArrivalMessage]=useState({})
+
+ const [arrivalMessage,setArrivalMessage]=useState([])
 
  const arrivalHandler=(x)=>{
-   setArrivalMessage(x)
+   setArrivalMessage([...arrivalMessage,x])
  }
 
 
