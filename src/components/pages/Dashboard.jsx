@@ -26,11 +26,18 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    let isApiSubscribed = true;
+    if(isApiSubscribed){
     if(window.innerWidth>=768){
       setLView(true)
   }else{
       setLView(false)
   }
+}
+return () => {
+  // cancel the subscription
+  isApiSubscribed = false;
+};
   },[])
 
 
@@ -43,6 +50,8 @@ const Dashboard = () => {
 })
 
 useEffect(()=>{
+  let isApiSubscribed = true;
+  if (isApiSubscribed) {
   dispatch(setMobileConversation({
     conversation:{
       roomid:roomId,
@@ -52,41 +61,52 @@ useEffect(()=>{
       title:conversation
     }
   }))
+}
+return () => {
+  // cancel the subscription
+  isApiSubscribed = false;
+};
 },[roomId,message,roomtype,conversation])
 
   //friend list
   const [fl,setFl]=useState([])
    useEffect(()=>{
-
+    let isApiSubscribed = true;
     axios.get(`${process.env.REACT_APP_SERVER}/user/`,{
            headers:{
                authorization:"Bearer "+token
            }
        }).then(res=>{
+         if(isApiSubscribed){
           setFl(res.data.message)
+         }
        })
-       .catch(err=>console.log(err))
+      //  .catch(err=>console.log(err))
+       return () => {
+        // cancel the subscription
+        isApiSubscribed = false;
+    };
    }
-   ,[token])
+,[token])
 
   
 
   //conversation
-  const roomOpen=async(id,group,member)=>{
+  const roomOpen=(id,group,member)=>{
 
-     await axios.get(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
+      axios.get(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
           headers:{
               authorization:'Bearer '+token
           }
       })
-      .then(async(res)=>{
+      .then((res)=>{
         console.log(res.data)
           if(!res.data.err){
             setRoomId(id)
             setMessage(res.data)
             setConversation(member)
             setRoomtype(group)
-            await dispatch(setMobileConversation({
+             dispatch(setMobileConversation({
               conversation:{
                 roomid:id,
                 intro:id?false:true,
@@ -114,14 +134,14 @@ useEffect(()=>{
  
   //room create
   //personal
-  const roomCreate=async(x,member)=>{
+  const roomCreate=(x,member)=>{
     let data={
       member:[user._id.toString(),x.toString()]
     }
     let title=[]
     title[0]=member
 
-    await axios.post(`${process.env.REACT_APP_SERVER}/room`,
+     axios.post(`${process.env.REACT_APP_SERVER}/room`,
     data,{
       headers:{
         authorization:'Bearer '+token
@@ -152,14 +172,23 @@ useEffect(()=>{
 
 
   useEffect(()=>{
+    let isApiSubscribed = true;
+
     axios.get(`${process.env.REACT_APP_SERVER}/room/me`,{
       headers:{
         authorization:"Bearer "+token
     }    
     })
     .then(res=>{
+      if(isApiSubscribed){
       setChatlist(res.data)
+      }
     })
+
+    return()=>{
+      isApiSubscribed=false;
+    }
+
   },[token])
 
  

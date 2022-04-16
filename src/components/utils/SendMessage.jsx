@@ -17,32 +17,58 @@ const SendMessage = ({roomid,receiver,arrival}) => {
   const user=useSelector(state=>state.user.user)
   const dispatch=useDispatch()
 
-  const socket=useRef(io(`ws://localhost:5000`))
-
-  let RoomID=roomid
-// console.log(room)
-  
-useEffect(()=>{
-  socket.current=io("ws://localhost:5000")
-  socket.current.emit("addRoom",roomid)
-  socket.current.on("getRooms",rooms=>{
-    console.log(rooms)
-  })
-  console.log(socket)
-},[])
-
-
- 
-
-
   const [mesgtext,setMesgtext] = useState('')
   const [bdisable,setbDisable] =useState(true) 
   const [emojiView,setEmojiView]=useState(false)
  const [mesend,setMesend]=useState(false)
- 
+ const [sendLoad,setSendLoad]=useState(false)
+
+  const socket=useRef()
+
+  let RoomID=roomid
+// console.log(room)
+
+
+useEffect(()=>{
+  let isApiSubscribed = true;
+  if(isApiSubscribed){
+socket.current=io("ws://localhost:5000")
+
+
+  }
+  return () => {
+    // cancel the subscription
+    socket.current.off(`getMessage${roomid}`)
+    isApiSubscribed = false;
+};
+},[user])
 
   
-  
+useEffect(()=>{
+  let isApiSubscribed = true;
+
+
+  if (isApiSubscribed) {
+
+  socket.current.emit("addRoom",roomid)
+  socket.current.on("getRooms",rooms=>{})
+  socket.current.on(`getMessage${roomid}`,data=>{
+    console.log(data)
+    arrival([data])
+    dispatch(setNewMessage({
+      newmessage:[data]
+    }))
+  })
+}
+
+  return () => {
+    // cancel the subscription
+    isApiSubscribed = false;
+};
+
+},[])
+
+
 
  
  
@@ -55,8 +81,9 @@ useEffect(()=>{
    }
   }
 
-  const send=async(id)=>{
-    await axios.post(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
+  const send=(id)=>{
+    setSendLoad(true)
+     axios.post(`${process.env.REACT_APP_SERVER}/conversation/${id}`,{
       message:mesgtext,
       sender:user._id
     },
@@ -64,7 +91,7 @@ useEffect(()=>{
     headers:{
       authorization:'Bearer '+token
     }
-  }).then(async(res)=>{
+  }).then((res)=>{
     console.log(receiver[0])
     if(res.data.message){
       socket.current.emit('sendMessage',{
@@ -72,12 +99,9 @@ useEffect(()=>{
         sender:user,
         text:mesgtext,
       })
+      setSendLoad(false)
     }
     setMesend(true)
-    socket.current.on(`getMessage${roomid}`,data=>{
-      console.log(data)
-      arrival([data])
-    })
   })
   
 }
@@ -124,9 +148,9 @@ useEffect(()=>{
             onChange={(e)=>mesgtextHanlder(e.target.value)}
         />
         <button
-         disabled={bdisable} 
+         disabled={bdisable || sendLoad} 
          onClick={()=>send(roomid)}>
-            Send
+           {sendLoad ? 'Loading' : 'Send'} 
         </button>
     </div>
     </>

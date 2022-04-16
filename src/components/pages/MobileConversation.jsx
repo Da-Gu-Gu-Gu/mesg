@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{ useState} from 'react'
 import Conversation from '../utils/Conversation'
 import './MobileConversation.css'
 import { useSelector } from 'react-redux'

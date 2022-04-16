@@ -6,7 +6,7 @@ const userSlice=createSlice({
         token:'',
         user:null,
         conversation:{},
-        newmessage:{}
+        newmessage:[]
     },
     reducers:{
         setToken:(state,action)=>{
@@ -25,7 +25,7 @@ const userSlice=createSlice({
             state.token=''
            state.user=null
             state.conversation={}
-            state.newmessage={}
+            state.newmessage=[]
         }
     }
 })

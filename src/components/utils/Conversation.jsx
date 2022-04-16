@@ -14,7 +14,7 @@ const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
  const [arrivalMessage,setArrivalMessage]=useState([])
 
  const arrivalHandler=(x)=>{
-   setArrivalMessage([...arrivalMessage,x])
+   setArrivalMessage(x)
  }
 
 
