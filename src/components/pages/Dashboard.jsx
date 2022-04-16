@@ -100,7 +100,7 @@ return () => {
           }
       })
       .then((res)=>{
-        console.log(res.data)
+     
           if(!res.data.err){
             setRoomId(id)
             setMessage(res.data)

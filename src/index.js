@@ -6,12 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import {store,persistor} from './components/utils/redux/Store'
 import { PersistGate } from 'redux-persist/integration/react'
+import {SocketContext,socket} from './components/utils/socket/socket'
+
 
 ReactDOM.render(
   <React.StrictMode>
   <Provider store={store}>
   <PersistGate loading={null} persistor={persistor}>
+    <SocketContext.Provider value={socket}>
     <App />
+    </SocketContext.Provider>
     </PersistGate>
   </Provider>
   </React.StrictMode>,

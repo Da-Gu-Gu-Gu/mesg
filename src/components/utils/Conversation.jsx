@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import './Conversation.css'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
@@ -6,16 +6,27 @@ import Messages from './Messages'
 import SendMessage from './SendMessage'
 import ChatProfile from './ChatProfile'
 
+import { SocketContext } from './socket/socket'
+import Conbo from './Combo'
+
 
 const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
+
+ const socket=useContext(SocketContext)
 
  const [cp,setCp]=useState(false)
 
  const [arrivalMessage,setArrivalMessage]=useState([])
 
  const arrivalHandler=(x)=>{
-   setArrivalMessage(x)
+   console.log(x)
+   setArrivalMessage([x])
  }
+
+ useEffect(()=>{
+  !intro && socket.emit("addRoom",roomid)
+ },[roomid])
+
 
 
 
@@ -42,10 +53,8 @@ const open=()=>{
         <ChatProfile data={title} roomtype={roomtype} open={open} />
         :
 
-        <>
-          <Messages mesg={chat} newmessage={arrivalMessage} roomid={roomid} />  
-          <SendMessage receiver={title} arrival={arrivalHandler} roomid={roomid} />
-          </>
+     
+        <Conbo   mesg={chat} newmessage={arrivalMessage} roomid={roomid} arrivalHandler={arrivalHandler}  />
       }
      
         </>

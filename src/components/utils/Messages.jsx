@@ -1,8 +1,11 @@
-import React,{useEffect,createRef,useState,useRef} from 'react'
+import React,{useEffect,createRef,useState} from 'react'
 import './Messages.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { format } from 'timeago.js';
 import { setNewMessage } from './redux/userReducer';
+
+// import { SocketContext } from './socket/socket';
+
 
 
 
@@ -13,11 +16,13 @@ import { setNewMessage } from './redux/userReducer';
 
 const Messages = ({ mesg ,roomid,newmessage}) => {
 
+    // const socket=useContext(SocketContext)
+
     const user = useSelector(state => state.user.user)
-    const arrivalMesg=useSelector(state=>state.user.newmessage)
+    // const arrivalMesg=useSelector(state=>state.user.newmessage)
     const scrollref=createRef(null)
     const [allmesg,setAllmesg]=useState([])
-    const dispatch=useDispatch()
+ 
 
     // const [newmesg,setNewmesg] =useState([])
 
@@ -37,22 +42,24 @@ const Messages = ({ mesg ,roomid,newmessage}) => {
 useEffect(()=>{
     let isApiSubscribed = true;
     //room id sit 
+    console.log('use')
+    console.log(newmessage)
     if (isApiSubscribed) {
     if(newmessage[0]){
     newmessage[0].roomid===roomid &&
     console.log(roomid)
     console.log(newmessage[0].roomid)
+
     setAllmesg((prev)=>[...prev,...newmessage])
-    dispatch(setNewMessage({
-        newmessage:[]
-    }))
+
+ 
     }
 }
 return () => {
     // cancel the subscription
     isApiSubscribed = false;
 };
-},[newmessage,roomid])
+},[newmessage])
 
 console.log(newmessage)
 

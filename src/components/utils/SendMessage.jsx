@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import {FiImage} from 'react-icons/fi'
 import './SendMessage.css'
 import {MdOutlineEmojiEmotions} from 'react-icons/md'
@@ -6,16 +6,16 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import 'emoji-mart/css/emoji-mart.css'
 import { Picker } from 'emoji-mart'
-import {io} from 'socket.io-client'
-import { useDispatch } from 'react-redux'
-import { setNewMessage } from './redux/userReducer'
+import { SocketContext } from './socket/socket'
 
  
-const SendMessage = ({roomid,receiver,arrival}) => {
+const SendMessage = ({roomid,arrivalHandler}) => {
+
+  const socket=useContext(SocketContext)
   
   const token=useSelector(state=>state.user.token)
   const user=useSelector(state=>state.user.user)
-  const dispatch=useDispatch()
+
 
   const [mesgtext,setMesgtext] = useState('')
   const [bdisable,setbDisable] =useState(true) 
@@ -23,54 +23,12 @@ const SendMessage = ({roomid,receiver,arrival}) => {
  const [mesend,setMesend]=useState(false)
  const [sendLoad,setSendLoad]=useState(false)
 
-  const socket=useRef()
-
-  let RoomID=roomid
-// console.log(room)
-
-
-useEffect(()=>{
-  let isApiSubscribed = true;
-  if(isApiSubscribed){
-socket.current=io("ws://localhost:5000")
-
-
-  }
-  return () => {
-    // cancel the subscription
-    socket.current.off(`getMessage${roomid}`)
-    isApiSubscribed = false;
-};
-},[user])
-
-  
-useEffect(()=>{
-  let isApiSubscribed = true;
-
-
-  if (isApiSubscribed) {
-
-  socket.current.emit("addRoom",roomid)
-  socket.current.on("getRooms",rooms=>{})
-  socket.current.on(`getMessage${roomid}`,data=>{
-    console.log(data)
-    arrival([data])
-    dispatch(setNewMessage({
-      newmessage:[data]
-    }))
-  })
-}
-
-  return () => {
-    // cancel the subscription
-    isApiSubscribed = false;
-};
-
-},[])
-
-
-
  
+ useEffect(()=>{
+  socket.on(`getMessage${roomid}`,data=>{
+    arrivalHandler(data)
+  })
+},[])
  
   const mesgtextHanlder=(x)=>{
    if( x.length >0 ){
@@ -92,9 +50,8 @@ useEffect(()=>{
       authorization:'Bearer '+token
     }
   }).then((res)=>{
-    console.log(receiver[0])
     if(res.data.message){
-      socket.current.emit('sendMessage',{
+      socket.emit('sendMessage',{
         roomid:roomid,
         sender:user,
         text:mesgtext,
