@@ -31,13 +31,19 @@ const SendMessage = ({roomid,arrivalHandler}) => {
 },[])
  
   const mesgtextHanlder=(x)=>{
-   if( x.length >0 ){
+    console.log(x)
+    console.log(x.length)
+   if( x.length >1 ){
       setbDisable(false) 
       setMesgtext(x)
    }else{
+    setbDisable(true) 
      setMesgtext(x)
    }
+   
+  alert(mesgtext)
   }
+
 
   const send=(id)=>{
     setSendLoad(true)
@@ -57,6 +63,7 @@ const SendMessage = ({roomid,arrivalHandler}) => {
         text:mesgtext,
       })
       setSendLoad(false)
+      setMesgtext('')
     }
     setMesend(true)
   })
@@ -95,18 +102,22 @@ const SendMessage = ({roomid,arrivalHandler}) => {
    }}
    />
   }
-
+  <p style={{background:'white'}}>{bdisable}</p>
+   <p>{mesgtext} fasdfj ;k dsf;k</p>
     <div className='sendwrap'>
+  
     <FiImage className='gallery'/>
          <MdOutlineEmojiEmotions className='emoji'  onClick={()=>setEmojiView(!emojiView)}/> 
+         
         <input type="text" name="message" value={mesgtext} id="message" className='mesg' 
             placeholder='Aa'
            
             onChange={(e)=>mesgtextHanlder(e.target.value)}
         />
+        
         <button
-         disabled={bdisable || sendLoad} 
-         onClick={()=>send(roomid)}>
+         disabled={bdisable} 
+         onClick={()=>bdisable?null:send(roomid)}>
            {sendLoad ? 'Loading' : 'Send'} 
         </button>
     </div>

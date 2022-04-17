@@ -79,12 +79,16 @@ const Conbo = ({ mesg, roomid, newmessage ,arrivalHandler}) => {
       },[roomid])
 
       const mesgtextHanlder=(x)=>{
-        if( x.length >0 ){
-           setbDisable(false) 
-           setMesgtext(x)
+        console.log(x)
+        console.log(x==='')
+        setMesgtext(x)
+        if( x==='' ){
+            setbDisable(true)
         }else{
-          setMesgtext(x)
+            setbDisable(false) 
+            
         }
+       
        }
 
        const send=(id)=>{
@@ -105,6 +109,7 @@ const Conbo = ({ mesg, roomid, newmessage ,arrivalHandler}) => {
             text:mesgtext,
           })
           setSendLoad(false)
+          mesgtextHanlder('')
         }
         
       })
