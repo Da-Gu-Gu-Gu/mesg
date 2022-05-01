@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://mesg-server-q051oshwh-tankamout.vercel.app",
+  "proxy": "https://mesg-server.vercel.app",
   "dependencies": {
     "@multiavatar/multiavatar": "^1.0.7",
     "@reduxjs/toolkit": "^1.8.0",
