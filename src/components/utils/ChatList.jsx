@@ -47,11 +47,11 @@ const ChatList = ({ data ,group,search , view,room,intro ,fl,fsearch,fsearchHand
                 }
                     }>
                     <div className='avatar'>
-                        <img src={`${x.member.filter(x=>x._id!==user._id)[0].img.split(' ')[0]}.svg`} alt="avatar" />
+                        <img src={`${x.member.filter(x=>x._id!==user._id)[0]?.img.split(' ')[0]}.svg`} alt="avatar" />
                         <div className='status'></div>
                     </div>
                     <div className="desc">
-                        <p className='name'>{x.member.filter(x=>x._id!==user._id)[0].name.toUpperCase()}</p>
+                        <p className='name'>{x.member.filter(x=>x._id!==user._id)[0]?.name.toUpperCase()}</p>
                         <span className='msg'>Say Hi ,to your friend !</span>
                     </div>
                     <div >
