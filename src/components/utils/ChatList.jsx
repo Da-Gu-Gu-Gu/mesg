@@ -1,7 +1,6 @@
 import React from 'react'
 import './ChatList.css'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import Search from './Search'
 import FriendList from './FriendList'
 
@@ -10,7 +9,7 @@ import FriendList from './FriendList'
 const ChatList = ({ data ,group,search , view,room,intro ,fl,fsearch,fsearchHandler}) => {
 
     const user=useSelector(state=>state.user.user)
-    const navigate=useNavigate()
+   
     // const redirect=()=>{
     //     navigate('/conversation')
     // }
@@ -25,7 +24,7 @@ const ChatList = ({ data ,group,search , view,room,intro ,fl,fsearch,fsearchHand
                 
                 :
                 data
-                .filter(x=>group?x.isGroup===group:x)
+                ?.filter(x=>group?x.isGroup===group:x)
                 .filter(y=>
                     y.member.filter(a=>{
                     if(a._id!==user._id){

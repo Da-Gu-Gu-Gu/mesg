@@ -1,8 +1,8 @@
 import React,{useEffect,createRef,useState} from 'react'
 import './Messages.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { format } from 'timeago.js';
-import { setNewMessage } from './redux/userReducer';
+
 
 // import { SocketContext } from './socket/socket';
 
@@ -59,7 +59,7 @@ return () => {
     // cancel the subscription
     isApiSubscribed = false;
 };
-},[newmessage])
+},[newmessage,roomid])
 
 console.log(newmessage)
 
@@ -68,7 +68,7 @@ useEffect(()=>{
     scrollref?.current.scrollIntoView({
         behavior:'smooth'
     })
-},[allmesg])
+},[allmesg,scrollref])
   
 
     return (

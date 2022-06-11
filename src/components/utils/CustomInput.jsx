@@ -11,17 +11,17 @@ const Switch=(x)=>{
   switch(x){
     case "Email":
       return <HiOutlineMail />
-      break;
+    
     
     case "Password":
        return  <MdLockOutline/>
-        break;
+      
     case "Name":
        return <CgBoy />
-        break;
+      
     case "Confirm Password":
       return  <MdOutlineGppGood />
-      break;
+    
     default:
         break;
 

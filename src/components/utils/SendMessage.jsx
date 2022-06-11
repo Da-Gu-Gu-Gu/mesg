@@ -20,7 +20,6 @@ const SendMessage = ({roomid,arrivalHandler}) => {
   const [mesgtext,setMesgtext] = useState('')
   const [bdisable,setbDisable] =useState(true) 
   const [emojiView,setEmojiView]=useState(false)
- const [mesend,setMesend]=useState(false)
  const [sendLoad,setSendLoad]=useState(false)
 
  
@@ -28,7 +27,7 @@ const SendMessage = ({roomid,arrivalHandler}) => {
   socket.on(`getMessage${roomid}`,data=>{
     arrivalHandler(data)
   })
-},[])
+},[arrivalHandler,roomid,socket])
  
   const mesgtextHanlder=(x)=>{
     console.log(x)
@@ -65,7 +64,6 @@ const SendMessage = ({roomid,arrivalHandler}) => {
       setSendLoad(false)
       setMesgtext('')
     }
-    setMesend(true)
   })
   
 }
@@ -98,7 +96,6 @@ const SendMessage = ({roomid,arrivalHandler}) => {
       bottom:40,
      left:'0px',
      transition:'all 200ms',
-     transition:'ease-in'
    }}
    />
   }

@@ -17,7 +17,7 @@ const Verify = () => {
       } catch (error) {
           console.log(error)
       }  
-    },[])
+    },[id,token])
 
   return (
     <div className='verify'>

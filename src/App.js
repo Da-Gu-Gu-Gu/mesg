@@ -4,7 +4,7 @@ import Home from './components/pages/Home'
 import Verify from './components/pages/Verify'
 import ResetPassword from './components/pages/ResetPassword'
 import './App.css'
-import {BrowserRouter as Router,Routes,Route, Navigate} from 'react-router-dom'
+import {BrowserRouter as Router,Routes,Route} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MobileConversation from './components/pages/MobileConversation'
 

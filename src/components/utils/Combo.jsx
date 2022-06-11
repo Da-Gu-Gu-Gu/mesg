@@ -76,7 +76,7 @@ const Conbo = ({ mesg, roomid, newmessage ,arrivalHandler}) => {
         // unbind all event handlers used in this component
         socket.off(`getMessage${roomid}`);
       };
-      },[roomid])
+      },[roomid,arrivalHandler,socket])
 
       const mesgtextHanlder=(x)=>{
         console.log(x)
@@ -141,7 +141,7 @@ const Conbo = ({ mesg, roomid, newmessage ,arrivalHandler}) => {
         scrollref?.current.scrollIntoView({
             behavior: 'smooth'
         })
-    }, [allmesg])
+    }, [allmesg,scrollref])
 
 
     return (
@@ -202,7 +202,7 @@ const Conbo = ({ mesg, roomid, newmessage ,arrivalHandler}) => {
                             bottom: 40,
                             left: '0px',
                             transition: 'all 200ms',
-                            transition: 'ease-in'
+                            // transition: 'ease-in'
                         }}
                     />
                 }

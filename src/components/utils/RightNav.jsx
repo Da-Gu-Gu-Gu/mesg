@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useState} from 'react'
 import ChatList from './ChatList'
 import './RightNav.css'
 import {IoCreateOutline} from 'react-icons/io5'

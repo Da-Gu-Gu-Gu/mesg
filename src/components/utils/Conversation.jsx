@@ -2,8 +2,6 @@ import React,{useState,useContext,useEffect} from 'react'
 import './Conversation.css'
 import {BsFillCameraVideoFill} from 'react-icons/bs'
 import {CgProfile} from 'react-icons/cg'
-import Messages from './Messages'
-import SendMessage from './SendMessage'
 import ChatProfile from './ChatProfile'
 
 import { SocketContext } from './socket/socket'
@@ -25,7 +23,7 @@ const Conversation = ({classname,view,roomid,chat,title,roomtype,intro}) => {
 
  useEffect(()=>{
   !intro && socket.emit("addRoom",roomid)
- },[roomid])
+ },[roomid,intro,socket])
 
 
 

@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
 import FriendList from './FriendList'
 import './LeftNav.css'
 import Search from './Search'

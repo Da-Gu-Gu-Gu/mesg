@@ -4,7 +4,7 @@ import CustomInput from '../utils/CustomInput'
 import SiginButton from '../utils/SiginButton'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Link, useParams,useNavigate} from 'react-router-dom'
+import { useParams,useNavigate} from 'react-router-dom'
 import './ResetPassword.css'
 
 const ResetPassword = () => {
@@ -34,7 +34,7 @@ const ResetPassword = () => {
         } catch (error) {
             console.log(error)
         }  
-      },[])
+      },[id,navigate,token])
 
 
 

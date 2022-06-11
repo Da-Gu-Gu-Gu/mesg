@@ -1,5 +1,5 @@
 import Header from "../utils/Header";
-import React,{useState,useEffect, useRef} from 'react'
+import React,{useState,useEffect} from 'react'
 import './Dashboard.css'
 import LeftNav from "../utils/LeftNav";
 import Conversation from "../utils/Conversation";
